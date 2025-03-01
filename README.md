@@ -15,6 +15,7 @@
 
 ### 3. 실시간 데이터 통합
 - 서울시 공공 API를 활용하여 날씨 및 미세먼지 데이터를 실시간으로 수집합니다.
+- 실시간 환율 데이터를 가져와 분석에 반영합니다.
 - 머신러닝 모델을 사용하여 방문자 수를 예측하고 대시보드를 통해 시각화합니다.
 
 ### 4. 직관적인 데이터 시각화
@@ -26,7 +27,7 @@
 - **백엔드**: Python, Flask
 - **데이터 처리**: Pandas, NumPy, Requests
 - **머신러닝**: XGBoost, Scikit-learn
-- **데이터 수집**: 서울시 공공 API, Web Scraping
+- **데이터 수집**: 서울시 공공 API, Web Scraping, Currencylayer API (환율 데이터)
 - **모델 저장**: Joblib (scaler 및 학습된 모델 관리)
 
 ## 📂 프로젝트 구조
@@ -43,6 +44,7 @@ koreatourguide/
 │   ├── 예술의전당_filtered2.csv
 │   ├── 서울대공원_filtered2.csv
 ├── pkl/                         # 학습된 모델 및 스케일러 저장 폴더
+│   ├── scaler_Exchange_rate.pkl
 │   ├── scaler_Humidity.pkl
 │   ├── scaler_Rainfall.pkl
 │   ├── scaler_Temperature.pkl
@@ -63,7 +65,8 @@ koreatourguide/
 ## 🔧 설치 및 사용법
 ### 1. 사전 준비
 - Python 3.8 이상
-- 필수 라이브러리 설치: Pandas, NumPy, XGBoost, Scikit-learn, Streamlit, Plotly
+- 필수 라이브러리 설치: Pandas, NumPy, XGBoost, Scikit-learn, Streamlit, Plotly, Requests
+- Currencylayer API 키 발급 (환율 데이터 사용 시 필요)
 
 ### 2. 리포지토리 클론
 ```bash
@@ -114,13 +117,26 @@ streamlit run dashboard.py
 }
 ```
 
+### 3. 실시간 환율 데이터 조회
+- **Method**: GET
+- **Endpoint**: `/exchange-rate`
+- **Response**:
+```json
+{
+  "USD_KRW": 1320.5,
+  "USD_JPY": 147.2,
+  "USD_EUR": 0.92
+}
+```
+
 ## 🔒 보안
 - API 키 및 민감 데이터는 `.gitignore`에 포함하여 외부 노출 방지
 - API 요청 속도 제한 적용 (Throttle)으로 서버 과부하 방지
 - 환경 변수 활용하여 API 키 관리
 
 ## 📈 향후 개선 사항
-- 외국인 외에도 내국인 대상까지 모두 고려한 설계
+- 사용자 맞춤 추천 기능 추가
+- 날씨 예측 모델 적용하여 미래 혼잡도 예측
 - 서울 외 지역 관광지 확장
 - 모바일 앱 개발 및 배포
 
