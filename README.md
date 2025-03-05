@@ -81,7 +81,7 @@ pip install -r requirements.txt
 
 ### 4. 머신러닝 모델 실행
 ```bash
-python train_and_predict/changgyeonggung.py
+python train_and_predict/changgyeonggung.py 등등
 ```
 
 ### 5. 대시보드 실행
@@ -139,6 +139,3 @@ streamlit run dashboard.py
 - 날씨 예측 모델 적용하여 미래 혼잡도 예측
 - 서울 외 지역 관광지 확장
 - 모바일 앱 개발 및 배포
-
----
-
