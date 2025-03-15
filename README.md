@@ -24,10 +24,10 @@
 
 ## 🛠️ 기술 스택
 - **프론트엔드**: Streamlit, Plotly
-- **백엔드**: Python, Flask
+- **백엔드**: Python
 - **데이터 처리**: Pandas, NumPy, Requests
 - **머신러닝**: XGBoost, Scikit-learn
-- **데이터 수집**: 서울시 공공 API, Web Scraping, Currencylayer API (환율 데이터)
+- **데이터 수집**: 서울시 공공 API, Currencylayer API (환율 데이터)
 - **모델 저장**: Joblib (scaler 및 학습된 모델 관리)
 
 ## 📂 프로젝트 구조
