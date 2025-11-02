@@ -62,7 +62,7 @@ koreatourguide/
 └── README.md                    # 프로젝트 문서
 ```
 
-## 🔧 설치 및 사용법
+## 설치 및 사용법
 ### 1. 사전 준비
 - Python 3.8 이상
 - 필수 라이브러리 설치: Pandas, NumPy, XGBoost, Scikit-learn, Streamlit, Plotly, Requests
