@@ -1,9 +1,11 @@
-pandas
-numpy
-xgboost
-scikit-learn
-streamlit
-plotly
-requests
-joblib
-matplotlib
+# 프로젝트 전체 의존성 (개발용)
+# 실제 사용 시에는 ml_service/requirements.txt와 backend/requirements.txt를 각각 설치하세요
+
+# ML Service 의존성
+-r ml_service/requirements.txt
+
+# Backend 의존성
+-r backend/requirements.txt
+
+# 개발/스크립트용 (선택사항)
+matplotlib>=3.7.0

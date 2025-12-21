@@ -1,10 +1,13 @@
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, Tooltip } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { touristSpots } from '@/data/touristSpots';
-import { congestionColors } from '@/types/tourist';
+import { congestionColors, type TouristSpot } from '@/types/tourist';
 
-export function ComparisonChart() {
-  const data = touristSpots
+interface ComparisonChartProps {
+  spots: TouristSpot[];
+}
+
+export function ComparisonChart({ spots }: ComparisonChartProps) {
+  const data = spots
     .map(spot => ({
       name: spot.name,
       visitors: spot.expectedVisitors,

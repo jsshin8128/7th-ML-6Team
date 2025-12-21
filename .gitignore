@@ -1,0 +1,48 @@
+# 가상환경
+venv/
+env/
+ENV/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 데이터베이스
+*.db
+*.sqlite
+*.sqlite3
+data/processed/
+data/backup/
+
+# 모델 및 스케일러 (선택사항 - 필요시 주석 해제)
+# pkl/
+# models/*.pkl
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그
+*.log
+
+# 임시 파일
+*.tmp
+*.bak
+
+# 환경 변수 파일
+.env
+
+# 프론트엔드 (별도 레포지토리에서 관리)
+# 향후 subtree로 통합 예정
+frontend/

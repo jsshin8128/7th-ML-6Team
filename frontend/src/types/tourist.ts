@@ -9,7 +9,6 @@ export interface TouristSpot {
   expectedVisitors: number;
   trend: 'up' | 'down' | 'stable';
   hourlyData: { hour: string; visitors: number }[];
-  peakHour: string;
   address: string;
 }
 

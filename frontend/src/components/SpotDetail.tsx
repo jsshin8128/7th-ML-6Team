@@ -1,10 +1,8 @@
-import { X, Users, Clock, MapPin, TrendingUp, TrendingDown, Minus } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
+import { X, Users, MapPin, TrendingUp, TrendingDown, Minus, Clock, BarChart3 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CongestionBadge } from './CongestionBadge';
 import type { TouristSpot } from '@/types/tourist';
-import { congestionColors } from '@/types/tourist';
 
 interface SpotDetailProps {
   spot: TouristSpot;
@@ -14,7 +12,6 @@ interface SpotDetailProps {
 export function SpotDetail({ spot, onClose }: SpotDetailProps) {
   const TrendIcon = spot.trend === 'up' ? TrendingUp : spot.trend === 'down' ? TrendingDown : Minus;
   const trendText = spot.trend === 'up' ? '증가 추세' : spot.trend === 'down' ? '감소 추세' : '유지';
-  const chartColor = congestionColors[spot.congestionLevel];
 
   return (
     <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm animate-fade-in">
@@ -35,17 +32,11 @@ export function SpotDetail({ spot, onClose }: SpotDetailProps) {
         </div>
 
         <div className="p-5 space-y-5">
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             <Card variant="flat" className="p-4 text-center">
               <Users className="w-5 h-5 mx-auto mb-2 text-primary" />
               <p className="text-lg font-bold text-foreground">{spot.expectedVisitors.toLocaleString()}</p>
               <p className="text-xs text-muted-foreground">예상 방문자</p>
-            </Card>
-            <Card variant="flat" className="p-4 text-center">
-              <Clock className="w-5 h-5 mx-auto mb-2 text-primary" />
-              <p className="text-lg font-bold text-foreground">{spot.peakHour}</p>
-              <p className="text-xs text-muted-foreground">피크 시간</p>
             </Card>
             <Card variant="flat" className="p-4 text-center">
               <TrendIcon className="w-5 h-5 mx-auto mb-2 text-primary" />
@@ -54,56 +45,26 @@ export function SpotDetail({ spot, onClose }: SpotDetailProps) {
             </Card>
           </div>
 
-          {/* Chart */}
           <Card variant="default">
             <CardHeader>
               <CardTitle className="text-base">시간대별 방문자 예측</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-48">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={spot.hourlyData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id={`gradient-${spot.id}`} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor={chartColor} stopOpacity={0.3} />
-                        <stop offset="100%" stopColor={chartColor} stopOpacity={0.05} />
-                      </linearGradient>
-                    </defs>
-                    <XAxis 
-                      dataKey="hour" 
-                      tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }}
-                      tickLine={false}
-                      axisLine={false}
-                    />
-                    <YAxis 
-                      tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }}
-                      tickLine={false}
-                      axisLine={false}
-                      tickFormatter={(value) => value >= 1000 ? `${(value/1000).toFixed(0)}k` : value}
-                    />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: 'hsl(var(--card))',
-                        border: '1px solid hsl(var(--border))',
-                        borderRadius: '12px',
-                        boxShadow: 'var(--shadow-lg)'
-                      }}
-                      formatter={(value: number) => [`${value.toLocaleString()}명`, '방문자']}
-                    />
-                    <Area 
-                      type="monotone" 
-                      dataKey="visitors" 
-                      stroke={chartColor}
-                      strokeWidth={2}
-                      fill={`url(#gradient-${spot.id})`}
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
+              <div className="h-48 flex flex-col items-center justify-center gap-3">
+                <div className="w-16 h-16 rounded-full bg-muted/50 flex items-center justify-center">
+                  <BarChart3 className="w-8 h-8 text-muted-foreground" />
+                </div>
+                <div className="flex flex-col items-center gap-1">
+                  <p className="text-sm font-medium text-muted-foreground">추후 반영 예정</p>
+                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground/80">
+                    <Clock className="w-3.5 h-3.5" />
+                    <span>개발 진행 중</span>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Location */}
           <Card variant="flat">
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
@@ -118,7 +79,6 @@ export function SpotDetail({ spot, onClose }: SpotDetailProps) {
             </CardContent>
           </Card>
 
-          {/* Description */}
           <div className="pb-6">
             <p className="text-sm text-muted-foreground leading-relaxed">{spot.description}</p>
           </div>

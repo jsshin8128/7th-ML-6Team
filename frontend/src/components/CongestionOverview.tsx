@@ -1,6 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { touristSpots } from '@/data/touristSpots';
-import { congestionLabels, type CongestionLevel } from '@/types/tourist';
+import { congestionLabels, type CongestionLevel, type TouristSpot } from '@/types/tourist';
 
 const levelOrder: CongestionLevel[] = ['low', 'normal', 'high', 'veryHigh'];
 
@@ -11,13 +10,17 @@ const levelStyles: Record<CongestionLevel, { bg: string; text: string; border: s
   veryHigh: { bg: 'bg-congestion-very-high/10', text: 'text-congestion-very-high', border: 'border-congestion-very-high/30' },
 };
 
-export function CongestionOverview() {
+interface CongestionOverviewProps {
+  spots: TouristSpot[];
+}
+
+export function CongestionOverview({ spots }: CongestionOverviewProps) {
   const counts = levelOrder.map(level => ({
     level,
-    count: touristSpots.filter(spot => spot.congestionLevel === level).length
+    count: spots.filter(spot => spot.congestionLevel === level).length
   }));
 
-  const totalVisitors = touristSpots.reduce((sum, spot) => sum + spot.expectedVisitors, 0);
+  const totalVisitors = spots.reduce((sum, spot) => sum + spot.expectedVisitors, 0);
 
   return (
     <div className="space-y-4">

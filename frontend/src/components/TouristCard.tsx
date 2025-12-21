@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, Minus, Users, Clock, MapPin } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, Users, MapPin } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { CongestionBadge } from './CongestionBadge';
 import type { TouristSpot } from '@/types/tourist';
@@ -32,29 +32,17 @@ export function TouristCard({ spot, index, onClick }: TouristCardProps) {
           {spot.description}
         </p>
 
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex items-center gap-2 text-sm">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Users className="w-4 h-4 text-primary" />
-            </div>
-            <div>
-              <p className="text-muted-foreground text-xs">예상 방문자</p>
-              <div className="flex items-center gap-1">
-                <span className="font-semibold text-foreground">
-                  {spot.expectedVisitors.toLocaleString()}
-                </span>
-                <TrendIcon className={`w-3 h-3 ${trendColor}`} />
-              </div>
-            </div>
+        <div className="flex items-center gap-2 text-sm">
+          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+            <Users className="w-4 h-4 text-primary" />
           </div>
-
-          <div className="flex items-center gap-2 text-sm">
-            <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-              <Clock className="w-4 h-4 text-accent-foreground" />
-            </div>
-            <div>
-              <p className="text-muted-foreground text-xs">피크 시간</p>
-              <span className="font-semibold text-foreground">{spot.peakHour}</span>
+          <div>
+            <p className="text-muted-foreground text-xs">예상 방문자</p>
+            <div className="flex items-center gap-1">
+              <span className="font-semibold text-foreground">
+                {spot.expectedVisitors.toLocaleString()}
+              </span>
+              <TrendIcon className={`w-3 h-3 ${trendColor}`} />
             </div>
           </div>
         </div>
